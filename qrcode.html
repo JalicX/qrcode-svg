@@ -10,9 +10,11 @@
 
 	</style>
 
+	<link rel="stylesheet" type="text/css" href="static/css/qrstyle.css">
 	<script src="qrcode.min.js"></script>
 </head>
 <body>
+
 
 <script>
 
@@ -24,8 +26,8 @@
 		/* with all available options: */
 		 new QRCode({
 
-			 msg   :  'https://github.com/datalog/qrcode-svg'
-			,dim   :   256
+			 msg   :  'TEEEEEST'
+			,dim   :   100
 			,pad   :   4
 			,mtx   :  -1
 			,ecl   :  "H"
@@ -36,16 +38,16 @@
 		})
 
 		/* message, background is transparent as it was not set: */
-		,new QRCode({
+		/*,new QRCode({
 
 			 msg   :  'default usage'
 			,ecl   :  'L'
 
-		})
+		})*/
 
 
 		/* ...or simple form: */
-		,new QRCode('Good Luck')
+		/*,new QRCode('Good Luck')*/
 		
 	];
 
