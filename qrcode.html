@@ -20,6 +20,9 @@
 
 	'use strict';
 
+	const smallestdimension = Math.min(window.screen.width * window.devicePixelRatio, window.screen.height * window.devicePixelRatio);
+	//console.log(smallestdimension);
+
 	var
 	qrcodes = [
 
@@ -27,7 +30,7 @@
 		 new QRCode({
 
 			 msg   :  'TEST'
-			,dim   :   100
+			,dim   :   smallestdimension * 0.25
 			,pad   :   4
 			,mtx   :  -1
 			,ecl   :  "H"
