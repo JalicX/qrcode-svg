@@ -1,66 +1,104 @@
 <!DOCTYPE html>
 <html>
-<head>
+	<head>
+		<meta charset="utf-8"/>
+		<!--style type="text/css">
+		
+			*		{padding:0; margin:0;}
+			svg		{border:1px #eee solid;}
 
-	<meta charset="utf-8"/>
-	<style type="text/css">
-	
-		*		{padding:0; margin:0;}
-		svg		{border:1px #eee solid;}
+		</style-->
 
-	</style>
-
-	<link rel="stylesheet" type="text/css" href="static/css/qrstyle.css">
-	<script src="qrcode.min.js"></script>
-</head>
+		<link rel="stylesheet" type="text/css" href="static/css/qrstyle.css">
+		<script src="qrcode.min.js"></script>
+	</head>
 <body>
 
+	<div id=registrationWindow>
+		<!--form action = "{{ url_for('checkin') }}" method = "post"-->
+		<form>
+			<label class="inputLabel" for="name">Name</label>
+			<p><input type="text" id="name" name = "name" placeholder="Max Mustermann" autofocus="on" required="on" maxlength="80" value="Max Mustermann"></p>
+			
+			<label class="inputLabel" for="anschrift">Anschrift:</label>
+			<p><input type="text" id="anschrift" name = "anschrift" placeholder="Hauptstraße 1" required="on" maxlength="80" value="Hauptstrasse 1"></p>
+			
+			<label class="inputLabel" for="geburtsdatum">Geburtsdatum:</label>
+			<p><input type="date" id="geburtsdatum" name = "geburtsdatum" placeholder="12.05.1970" required="on"></p>
+			
+			<!--p><input type = "submit" value = "submit" /></p-->
+			<p><button type="button" onclick="myFunction()">QR Generieren</button></p>
+		</form>
+	</div>
+	<div id="qrcodeelementHTML">
 
-<script>
+	</div>
 
-	'use strict';
-
-	const smallestdimension = Math.min(window.screen.width * window.devicePixelRatio, window.screen.height * window.devicePixelRatio);
-	//console.log(smallestdimension);
-
-	var
-	qrcodes = [
-
-		/* with all available options: */
-		 new QRCode({
-
-			 msg   :  'TEST'
-			,dim   :   smallestdimension * 0.25
-			,pad   :   4
-			,mtx   :  -1
-			,ecl   :  "H"
-			,ecb   :   1
-			,pal   : ["#037", "#f2f4f8"]
-			,vrb   :   0
-
-		})
-
-		/* message, background is transparent as it was not set: */
-		/*,new QRCode({
-
-			 msg   :  'default usage'
-			,ecl   :  'L'
-
-		})*/
-
-
-		/* ...or simple form: */
-		/*,new QRCode('Good Luck')*/
+	<script>
+		//var formElement = document.getElementById("registrationWindow");
 		
-	];
+		function myFunction() {
+			generateQR();
+			var formElement = document.getElementById('registrationWindow');
+			//var qrElement = document.getElementById("myDIV");
+			//formElement.style.display = 'block';
+			formElement.style.display = 'none';
+			//formElement.style.visibility = "hidden";
+			//qrElement.style.display = "none";  
+		}
+	</script>
+	
+	<script>
+		function generateQR() {
+		'use strict';
+
+		const smallestdimension = Math.min(window.screen.width * window.devicePixelRatio, window.screen.height * window.devicePixelRatio);
+		//console.log(smallestdimension);
+		var qrdata = document.getElementById('name').value + "\n"
+		+ document.getElementById('anschrift').value + "\n"
+		+ document.getElementById('geburtsdatum').value + "\n";
+
+		var qrcodeelement = document.getElementById("qrcodeelementHTML");
+
+		var
+		qrcodes = [
+
+			/* with all available options: */
+			new QRCode({
+
+				msg   :  qrdata
+				,dim   :   smallestdimension * 0.25
+				,pad   :   4
+				,mtx   :  -1
+				,ecl   :  "H"
+				,ecb   :   1
+				,pal   : ["#037", "#f2f4f8"]
+				,vrb   :   0
+
+			})
+
+			/* message, background is transparent as it was not set: */
+			/*,new QRCode({
+
+				msg   :  'default usage'
+				,ecl   :  'L'
+
+			})*/
 
 
-	for( var c = 0; c < qrcodes.length; c++ ) {
+			/* ...or simple form: */
+			/*,new QRCode('Good Luck')*/
+			
+		];
 
-		document.body.appendChild( qrcodes[ c ] );
+
+		for( var c = 0; c < qrcodes.length; c++ ) {
+
+			//document.body.appendChild( qrcodes[ c ] );
+			qrcodeelement.appendChild(qrcodes [ c ]);
+		}
 	}
-
-</script>
+	</script>
 
 </body>
 </html>
